@@ -10,8 +10,13 @@ app.use(express.urlencoded({ extended: true })); // Allow the use of req.body
 
 // Get for the home route
 app.get('/', (req, res) => {
+  if (DEBUG) console.log('GET localhost:3000 index route called');
   res.render('index.ejs');
 });
+
+// Define a router for the /customers route
+const customersRouter = require('./routes/customers');
+app.use('/customers', customersRouter);
 
 // Render a 404 page after all routes have been checked
 app.use((req, res) => {

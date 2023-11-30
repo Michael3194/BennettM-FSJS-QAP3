@@ -7,9 +7,37 @@
 body {
   margin-top: 10px;
   margin-left: 10px;
+  height: 100%;
 }
 
-h3 {
+.page-title {
+  text-align: center;
+  font-size: 20px;
   margin-top: 20px;
-  margin-bottom: 20px;
+  padding: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+nav {
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.welcome-msg {
+  text-align: center;
+}
+
+.page-title {
+  font-size: 26px;
+}
+
+a:hover {
+  color: rgb(8, 83, 189);
+  font-size: 20px;
 }
