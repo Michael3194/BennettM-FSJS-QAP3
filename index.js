@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
+// Define a router for the api route
+const apiRouter = require('./routes/api');
+app.use('/api', apiRouter);
+
 // Define a router for the /customers route
 const customersRouter = require('./routes/customers');
 app.use('/customers', customersRouter);

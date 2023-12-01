@@ -1,0 +1,16 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <h3 class="welcome-msg">Welcome to the customers Route</h3>
+    <%- include('./partials/nav.ejs') %>
+    <ul>
+      <% if (customers.length === 0) { %>
+      <h3>No customers found</h3>
+      <% } else { customers.forEach( (customer) => { %>
+      <div class="customer-info">
+        <li><%= customer.first_name %> <%= customer.last_name %></li>
+      </div>
+      <% }) } %>
+    </ul>
+  </body>
+</html>

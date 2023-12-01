@@ -6,7 +6,7 @@ const getCustomers = async () => {
 
   const sql = `SELECT customer_id, first_name, last_name, email, has_membership
                  FROM customer
-                 ORDER BY customer_id ASC LIMIT 10;`;
+                 ORDER BY customer_id ASC LIMIT 4;`;
   try {
     const result = await dal.query(sql, []);
     return result.rows;

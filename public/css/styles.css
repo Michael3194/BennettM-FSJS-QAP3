@@ -5,7 +5,7 @@
 }
 
 body {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 10px;
   height: 100%;
 }
@@ -25,8 +25,7 @@ footer {
 }
 
 nav {
-  margin-top: 40px;
-  margin-left: 40px;
+  margin: 40px;
 }
 
 .welcome-msg {
@@ -40,4 +39,8 @@ nav {
 a:hover {
   color: rgb(8, 83, 189);
   font-size: 20px;
+}
+
+.customer-info {
+  margin-left: 20px;
 }
