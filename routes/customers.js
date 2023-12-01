@@ -6,6 +6,7 @@ router.get('/', async (req, res) => {
   try {
     if (DEBUG) console.log('GET /customers route called');
     let theCustomers = await getCustomers();
+
     // Render the customers.ejs view and give the customers array to the view
     res.render('customers.ejs', { customers: theCustomers });
     if (DEBUG) console.log(theCustomers);
