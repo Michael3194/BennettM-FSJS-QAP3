@@ -6,7 +6,7 @@ const getCustomers = async () => {
 
   const sql = `SELECT customer_id, first_name, last_name, email, has_membership
                  FROM customer
-                 ORDER BY customer_id ASC LIMIT 4;`;
+                 ORDER BY customer_id DESC LIMIT 4;`;
   try {
     const result = await dal.query(sql, []);
     return result.rows;
@@ -18,4 +18,29 @@ const getCustomers = async () => {
   }
 };
 
-module.exports = { getCustomers };
+// Add a customer to the database
+const addCustomer = async (first_name, last_name) => {
+  const sql = `INSERT INTO public.customer (first_name, last_name)
+               VALUES ($1, $2)
+               RETURNING customer_id;`;
+
+  if (DEBUG) console.log('dal.customers.js addCustomer() function called');
+
+  try {
+    // Try to add the customer to the database
+
+    const result = await dal.query(sql, [first_name, last_name]);
+
+    if (DEBUG) console.log('Customer added to database successfully');
+    if (DEBUG) console.log(result.rows[0]);
+  } catch (err) {
+    // Catch and throw any errors
+
+    console.log(
+      'ERROR: dal.customers.js addCustomer() function failed\n + err.message: ${err.message}'
+    );
+    throw err;
+  }
+};
+
+module.exports = { getCustomers, addCustomer };
