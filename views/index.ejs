@@ -4,12 +4,15 @@
   <body>
     <header>
       <h1 class="page-title">QAP3</h1>
+      <div class="menu">
+        <a href="/api" class="api">API</a>
+        <%- include('partials/nav.ejs') %>
+      </div>
     </header>
 
     <h3 class="welcome-msg">Welcome to the home page</h3>
     <br />
 
-    <%- include('partials/nav.ejs') %> <br />
     <%- include('partials/footer.ejs') %>
   </body>
 </html>
