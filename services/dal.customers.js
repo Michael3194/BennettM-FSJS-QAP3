@@ -18,6 +18,26 @@ const getCustomers = async () => {
   }
 };
 
+// Get a customer by customer_id
+const getCustomerById = async (id) => {
+  if (DEBUG) console.log('Inside dal.customers.js getCustomerById() function');
+
+  const sql = `SELECT * FROM customer WHERE customer_id = $1;`;
+
+  try {
+    const result = await dal.query(sql, [id]);
+    if (DEBUG) console.log(`Customer with id ${id} successfully found`);
+
+    return result.rows[0]; // Return the customer
+  } catch (err) {
+    console.log(
+      'Error in dal.customers.js getCustomerById() function: \n' + err.message
+    );
+
+    throw err;
+  }
+};
+
 // Add a customer to the database
 const addCustomer = async (first_name, last_name) => {
   const sql = `INSERT INTO public.customer (first_name, last_name)
@@ -43,4 +63,4 @@ const addCustomer = async (first_name, last_name) => {
   }
 };
 
-module.exports = { getCustomers, addCustomer };
+module.exports = { getCustomers, addCustomer, getCustomerById };
