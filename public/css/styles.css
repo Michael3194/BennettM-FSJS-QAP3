@@ -4,27 +4,37 @@
 
 body {
   height: 100%;
+}
+
+body,
+/* form, */
+.api-nav,
+.api-div {
   display: flex;
   flex-direction: column;
+}
+
+body,
+.api-div {
   align-items: center;
   gap: 20px;
 }
 
-.page-title {
-  font-size: 20px;
-}
-
 footer {
-  position: absolute;
-  bottom: 10px;
+  margin-top: auto;
 }
 
 .page-title {
   font-size: 26px;
 }
 
-a {
+a,
+li,
+.customer-details {
   font-size: 20px;
+}
+
+a {
   transition: color 0.3s, font-size 0.3s;
 }
 
@@ -34,19 +44,19 @@ a:hover {
 }
 
 .api-nav {
-  display: flex;
-  flex-direction: column;
   gap: 6px;
 }
 
-.api-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+span {
+  font-weight: 600;
 }
 
-form {
+.customer-link {
+  text-decoration: none;
+  color: black;
+}
+
+.customer-info {
   display: flex;
-  flex-direction: column;
+  gap: 15px;
 }
