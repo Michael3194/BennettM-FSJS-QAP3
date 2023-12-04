@@ -1,6 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { getCustomers, addCustomer } = require('../services/dal.customers');
+const {
+  getCustomers,
+  addCustomer,
+  getCustomerById,
+} = require('../services/dal.customers');
 
 router.get('/', async (req, res) => {
   try {
@@ -12,6 +16,29 @@ router.get('/', async (req, res) => {
     if (DEBUG) console.log(theCustomers);
   } catch (err) {
     console.log(err.message);
+    res.render('503.ejs');
+  }
+});
+
+// localhost:3000/customers/:id
+router.get('/:id', async (req, res) => {
+  const id = req.params.id; // Get the id from the url
+  if (DEBUG) console.log('GET /customers/:id route called');
+
+  try {
+    // Try to get the specified customer from the database
+    const theCustomer = await getCustomerById(id);
+    // Render the customer.ejs view and give it theCustomer
+    res.render('customer.ejs', { theCustomer });
+
+    if (DEBUG) {
+      console.log(
+        `GET on /customers/:id route successful\ntheCustomer:${theCustomer}`
+      );
+    }
+  } catch (err) {
+    // If an error occurs log it and then render the 503.ejs view
+    console.log('Error in GET /customers/:id route: ' + err.message);
     res.render('503.ejs');
   }
 });
