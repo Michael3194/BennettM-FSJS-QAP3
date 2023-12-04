@@ -1,12 +1,15 @@
-<html>
+<html lang="en">
   <%- include('./partials/head.ejs') %>
   <body>
     <%- include('./partials/nav.ejs') %>
+
     <h3 class="page-title">Customer Details Page</h3>
-    <p>First Name: <%= theCustomer.first_name %></p>
-    <p>Last Name: <%= theCustomer.last_name %></p>
-    <p>Email: <%= theCustomer.email %></p>
-    <p>Is Member: <%= theCustomer.has_membership %></p>
+    <div class="customer-details">
+      <p><span>First Name:</span> <%= theCustomer.first_name %></p>
+      <p><span>Last Name:</span> <%= theCustomer.last_name %></p>
+      <p><span>Email:</span> <%= theCustomer.email %></p>
+      <p><span>Is Member:</span> <%= theCustomer.has_membership %></p>
+    </div>
 
     <%- include('./partials/footer.ejs') %>
   </body>

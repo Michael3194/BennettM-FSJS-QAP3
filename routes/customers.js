@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
     if (DEBUG) console.log('POST /customers route called');
     await addCustomer(first_name, last_name);
 
-    // Use a redirect to this route to trigger a new GET to update customers list shown
+    // Use a redirect to this route to trigger a new GET to update the customers list shown on page
     res.redirect('/customers');
   } catch (err) {
     res
