@@ -7,7 +7,7 @@ body {
 }
 
 body,
-/* form, */
+.edit-form,
 .api-nav,
 .api-div {
   display: flex;
@@ -59,4 +59,13 @@ span {
 .customer-info {
   display: flex;
   gap: 15px;
+}
+
+.edit-form {
+  gap: 10px;
+  font-size: 20px;
+}
+
+input {
+  font-size: 20px;
 }

@@ -1,4 +1,6 @@
 const express = require('express');
+const methodOverride = require('method-override');
+
 const app = express();
 const PORT = 3000;
 
@@ -7,6 +9,7 @@ global.DEBUG = true; // Create a global flag to toggle for debugging
 app.set('view engine', 'ejs'); // Set the view engine to use EJS
 app.use(express.static('public')); // Set the static files directory
 app.use(express.urlencoded({ extended: true })); // Allow the use of req.body
+app.use(methodOverride('_method')); // Allow the use of other HTTP methods in HTML forms
 
 // Get for the home route
 app.get('/', (req, res) => {

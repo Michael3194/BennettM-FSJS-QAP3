@@ -4,6 +4,7 @@ const {
   getCustomers,
   addCustomer,
   getCustomerById,
+  patchCustomer,
 } = require('../services/dal.customers');
 
 router.get('/', async (req, res) => {
@@ -58,6 +59,33 @@ router.post('/', async (req, res) => {
       .render('503.ejs')
       .send('An error occured while adding the customer to the database');
   }
+});
+
+router.get('/:id/edit', async (req, res) => {
+  if (DEBUG) console.log('GET /customers/edit/:id route called');
+  if (DEBUG) console.log(`Editing customer: ${req.params.id}`);
+
+  try {
+    // Get the id from the url
+    const id = req.params.id;
+
+    // Try to get the customer from the database
+    const theCustomer = await getCustomerById(id);
+
+    // Render the editCustomer.ejs view and give it theCustomer object
+    res.render('editCustomer.ejs', { theCustomer });
+  } catch (err) {
+    // If an error occurs, log it, and then render the 503.ejs view
+    console.log(`Error in GET /customers/edit/:id route: ${err.message}`);
+    res.render('503.ejs');
+  }
+});
+
+router.patch('/:id', async (req, res) => {
+  const id = req.params.id;
+  const { first_name, last_name } = req.body;
+  await patchCustomer(id, first_name, last_name);
+  res.redirect('/customers');
 });
 
 module.exports = router;
