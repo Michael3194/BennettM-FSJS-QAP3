@@ -1,0 +1,27 @@
+<html lang="en">
+  <%- include('./partials/head.ejs') %> <%- include('./partials/nav.ejs') %>
+  <form
+    action="/customers/<%= theCustomer.customer_id %>?_method=PATCH"
+    method="post"
+    class="edit-form forms"
+  >
+    <label for="first_name">First Name:</label>
+    <input
+      type="text"
+      id="first_name"
+      name="first_name"
+      value="<%= theCustomer.first_name %>"
+      required
+    />
+    <label for="last_name">Last Name:</label>
+    <input
+      type="text"
+      id="last_name"
+      name="last_name"
+      value="<%= theCustomer.last_name %>"
+      required
+    />
+    <input type="submit" value="Edit Customer" />
+  </form>
+  <%- include('./partials/footer.ejs') %>
+</html>

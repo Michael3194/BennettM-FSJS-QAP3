@@ -12,7 +12,9 @@
         <a href="/customers/<%= customer.customer_id %>" class="customer-link"
           ><li><%= customer.first_name %> <%= customer.last_name %></li></a
         >
-        <a href="/customers/edit/:id" class="inline">Edit</a>
+        <a href="/customers/<%= customer.customer_id %>/edit/" class="inline"
+          >Edit</a
+        >
       </div>
       <% }) } %>
     </ul>
