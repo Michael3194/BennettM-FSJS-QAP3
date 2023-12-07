@@ -91,4 +91,37 @@ const patchCustomer = async (id, first_name, last_name) => {
   }
 };
 
-module.exports = { getCustomers, addCustomer, getCustomerById, patchCustomer };
+const putCustomer = async (id, first_name, last_name) => {
+  if (DEBUG) console.log('Inside dal.customers.js putCustomer() function');
+
+  const sql = `UPDATE customer
+              SET first_name = $1, last_name = $2
+              WHERE customer_id = $3
+              RETURNING *;`;
+
+  try {
+    // Try to update the customer in the database
+    const result = await dal.query(sql, [first_name, last_name, id]);
+    if (DEBUG) console.log(`Customer with id ${id} successfully updated`);
+    if (DEBUG) console.log(`Updated customer: ${result.rows[0]}`);
+
+    return result.rows[0];
+  } catch (err) {
+    // Catch and throw any errors
+    console.log(
+      'Error in dal.customers.js putCustomer() function: \n' +
+        'Error message =' +
+        err.message
+    );
+
+    throw err;
+  }
+};
+
+module.exports = {
+  getCustomers,
+  addCustomer,
+  getCustomerById,
+  patchCustomer,
+  putCustomer,
+};

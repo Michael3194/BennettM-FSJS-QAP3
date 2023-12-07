@@ -7,7 +7,7 @@ body {
 }
 
 body,
-.edit-form,
+.forms,
 .api-nav,
 .api-div {
   display: flex;
@@ -61,7 +61,7 @@ span {
   gap: 15px;
 }
 
-.edit-form {
+.forms {
   gap: 10px;
   font-size: 20px;
 }

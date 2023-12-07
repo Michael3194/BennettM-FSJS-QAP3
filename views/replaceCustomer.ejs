@@ -1,10 +1,7 @@
 <html lang="en">
   <%- include('./partials/head.ejs') %> <%- include('./partials/nav.ejs') %>
-  <form
-    action="/customers/<%= id %>?_method=PATCH"
-    method="post"
-    class="edit-form forms"
-  >
+
+  <form action="/customers/<%= id %>?_method=PUT" method="post" class="forms">
     <label for="first_name">First Name:</label>
     <input
       type="text"
@@ -21,7 +18,6 @@
       value="<%= last_name %>"
       required
     />
-    <input type="submit" value="Edit Customer" />
+    <input type="submit" value="PUT" />
   </form>
-  <%- include('./partials/footer.ejs') %>
 </html>

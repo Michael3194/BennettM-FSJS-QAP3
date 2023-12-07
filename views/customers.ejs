@@ -12,8 +12,13 @@
         <a href="/customers/<%= customer.customer_id %>" class="customer-link"
           ><li><%= customer.first_name %> <%= customer.last_name %></li></a
         >
-        <a href="/customers/<%= customer.customer_id %>/edit/" class="inline"
+        <a
+          href="/customers/<%= customer.customer_id %>/edit?first_name=<%= customer.first_name %>&last_name=<%= customer.last_name %>"
           >Edit</a
+        >
+        <a
+          href="/customers/<%= customer.customer_id %>/replace?first_name=<%= customer.first_name %>&last_name=<%= customer.last_name %>"
+          >Replace</a
         >
       </div>
       <% }) } %>

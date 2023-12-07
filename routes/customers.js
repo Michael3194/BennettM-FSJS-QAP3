@@ -5,6 +5,7 @@ const {
   addCustomer,
   getCustomerById,
   patchCustomer,
+  putCustomer,
 } = require('../services/dal.customers');
 
 router.get('/', async (req, res) => {
@@ -66,26 +67,70 @@ router.get('/:id/edit', async (req, res) => {
   if (DEBUG) console.log(`Editing customer: ${req.params.id}`);
 
   try {
-    // Get the id from the url
+    // Get the id, first_name, and last_name from the query string
     const id = req.params.id;
+    const first_name = req.query.first_name;
+    const last_name = req.query.last_name;
 
+    // Save a trip to the database by getting the first and last name from the query string
     // Try to get the customer from the database
-    const theCustomer = await getCustomerById(id);
+    // const theCustomer = await getCustomerById(id);
 
-    // Render the editCustomer.ejs view and give it theCustomer object
-    res.render('editCustomer.ejs', { theCustomer });
+    // Render the editCustomer.ejs view and give it the id, first_name, and last_name
+    res.render('editCustomer.ejs', { id, first_name, last_name });
   } catch (err) {
     // If an error occurs, log it, and then render the 503.ejs view
-    console.log(`Error in GET /customers/edit/:id route: ${err.message}`);
+    console.log(`Error in GET /customers/:id/edit route: ${err.message}`);
     res.render('503.ejs');
   }
 });
 
 router.patch('/:id', async (req, res) => {
+  if (DEBUG) console.log('PATCH /customers/:id route called');
   const id = req.params.id;
   const { first_name, last_name } = req.body;
-  await patchCustomer(id, first_name, last_name);
-  res.redirect('/customers');
+
+  try {
+    await patchCustomer(id, first_name, last_name);
+    if (DEBUG) console.log(`Customer ${id} successfully updated`);
+    res.redirect('/customers');
+  } catch (err) {
+    console.log(`Error in PATCH /customers/:id route: ${err.message}`);
+    res.render('503.ejs');
+  }
+});
+
+router.get('/:id/replace', async (req, res) => {
+  if (DEBUG) console.log('GET /customers/:id/replace route called');
+  if (DEBUG) console.log(`Replacing customer: ${req.params.id}`);
+
+  try {
+    // Get the id, first_name, and last_name from the query string
+    const id = req.params.id;
+    const first_name = req.query.first_name;
+    const last_name = req.query.last_name;
+
+    // Render the replaceCustomer.ejs view and give it the id, first_name, and last_name
+    res.render('replaceCustomer.ejs', { id, first_name, last_name });
+  } catch (err) {
+    // If an error occurs, log it, and then render the 503.ejs view
+    console.log(`Error in GET /customers/:id/replace route: ${err.message}`);
+    res.render('503.ejs');
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  if (DEBUG) console.log('PUT /customers/:id route called');
+  const id = req.params.id;
+  const { first_name, last_name } = req.body;
+
+  try {
+    await putCustomer(id, first_name, last_name);
+    res.redirect('/customers');
+  } catch (err) {
+    console.log(`Error in PUT /customers/:id route: ${err.message}`);
+    res.render('503.ejs');
+  }
 });
 
 module.exports = router;
