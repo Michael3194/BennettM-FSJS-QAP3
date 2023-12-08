@@ -6,6 +6,7 @@ const {
   getCustomerById,
   patchCustomer,
   putCustomer,
+  deleteCustomer,
 } = require('../services/dal.customers');
 
 router.get('/', async (req, res) => {
@@ -102,7 +103,6 @@ router.patch('/:id', async (req, res) => {
 
 router.get('/:id/replace', async (req, res) => {
   if (DEBUG) console.log('GET /customers/:id/replace route called');
-  if (DEBUG) console.log(`Replacing customer: ${req.params.id}`);
 
   try {
     // Get the id, first_name, and last_name from the query string
@@ -121,14 +121,44 @@ router.get('/:id/replace', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   if (DEBUG) console.log('PUT /customers/:id route called');
+  if (DEBUG) console.log(`Replacing customer: ${req.params.id}`);
   const id = req.params.id;
   const { first_name, last_name } = req.body;
 
   try {
     await putCustomer(id, first_name, last_name);
+    if (DEBUG) console.log(`Customer ${id} successfully updated`);
     res.redirect('/customers');
   } catch (err) {
     console.log(`Error in PUT /customers/:id route: ${err.message}`);
+    res.render('503.ejs');
+  }
+});
+
+router.get('/:id/delete', async (req, res) => {
+  if (DEBUG) console.log('GET /customers/:id/delete route called');
+  const id = req.params.id;
+  const first_name = req.query.first_name;
+  const last_name = req.query.last_name;
+  try {
+    // const { first_name, last_name } = req.query;
+    res.render('deleteCustomer.ejs', { id, first_name, last_name });
+  } catch (err) {
+    console.log(`Error in GET /customers/:id/delete route: ${err.message}`);
+    res.render('503.ejs');
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  if (DEBUG) console.log('DELETE /customers/:id route called');
+  if (DEBUG) console.log(`Deleting customer: ${req.params.id}`);
+
+  try {
+    await deleteCustomer(req.params.id);
+    if (DEBUG) console.log(`Customer ${req.params.id} successfully deleted`);
+    res.redirect('/customers');
+  } catch (err) {
+    console.log(`Error in DELETE /customers/:id route: ${err.message}`);
     res.render('503.ejs');
   }
 });

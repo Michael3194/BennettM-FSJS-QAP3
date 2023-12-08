@@ -20,6 +20,10 @@
           href="/customers/<%= customer.customer_id %>/replace?first_name=<%= customer.first_name %>&last_name=<%= customer.last_name %>"
           >Replace</a
         >
+        <a
+          href="/customers/<%= customer.customer_id %>/delete?first_name=<%= customer.first_name %>&last_name=<%= customer.last_name %>"
+          >DELETE</a
+        >
       </div>
       <% }) } %>
     </ul>
