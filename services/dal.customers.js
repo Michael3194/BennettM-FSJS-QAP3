@@ -118,10 +118,32 @@ const putCustomer = async (id, first_name, last_name) => {
   }
 };
 
+const deleteCustomer = async (id) => {
+  if (DEBUG) console.log('Inside dal.customers.js deleteCustomer() function');
+
+  const sql = `DELETE FROM customer
+               WHERE customer_id = $1;`;
+
+  try {
+    // Try to delete the customer from the database
+    await dal.query(sql, [id]);
+  } catch (err) {
+    // Catch and throw any errors
+    console.log(
+      'Error in dal.customers.js deleteCustomer() function: \n' +
+        'Error message =' +
+        err.message
+    );
+
+    throw err;
+  }
+};
+
 module.exports = {
   getCustomers,
   addCustomer,
   getCustomerById,
   patchCustomer,
   putCustomer,
+  deleteCustomer,
 };
